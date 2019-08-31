@@ -1,6 +1,6 @@
 class Follower
-    attr_accessor :age
-    attr_reader :name, :life_motto
+    attr_accessor :age, :life_motto
+    attr_reader :name
 
     @@all = []
 
@@ -34,7 +34,7 @@ class Follower
     #Works!
     def join_cult(cult)
         if self.age >= cult.min_age
-            BloodOath.new(Time.now, cult, self)
+            BloodOath.new(cult, self)
         else
             puts "Sorry! You're too young to join this circle of damnation."
         end
@@ -47,10 +47,9 @@ class Follower
 
     #Works!
     def fellow_cult_members()
-        nested_members = self.cults().each_with_object([]) do | cult, array |
-            array << cult.followers()
+        Follower.all.select() do | follower |
+            follower.cults & self.cults != [] && follower != self
         end
-        nested_members.flatten().reject() { | follower | follower == self }
     end
 
 
