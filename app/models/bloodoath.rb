@@ -6,8 +6,8 @@ class BloodOath
 
     ###### Instance methods ######
     #Works!
-    def initialize(date, cult, follower)
-        @date = date
+    def initialize(cult, follower)
+        @date = Time.now
         @cult = cult
         @follower = follower
 
@@ -28,7 +28,7 @@ class BloodOath
     ###### Class methods ######
     #Works!
     def self.first_oath()
-        @@all[0].follower
+        @@all.min_by() { | oath | oath.date() }
     end
 
 end
