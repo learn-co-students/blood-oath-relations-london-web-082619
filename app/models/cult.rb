@@ -4,11 +4,12 @@ class Cult
 
     @@all = []
 
-    def initialize(name, location, founding_yr, slogan)
+    def initialize(name, location, founding_yr, slogan, min_age = 18)
         @name = name
         @location = location
         @founding_yr = founding_yr
         @slogan = slogan
+        @min_age = min_age
         @@all << self
     end
 
@@ -17,7 +18,11 @@ class Cult
     end
 
     def recruit_follower(follower)
-        BloodOath.new(self, follower)
+        if follower.age >= self.min_age
+            BloodOath.new(self, follower)
+        else
+            puts "This child is not yet ready to gaze into the eternal flame!"
+        end
     end
 
 

@@ -25,7 +25,11 @@ class Follower
     end
 
     def join_cult(cult)
+        if self.age >= cult.min_age
             BloodOath.new(cult, self)
+        else
+            puts "Strong in the force are you, but you are not a jedi, yet!"
+        end
     end
 
     def self.of_a_certain_age(age)
@@ -47,5 +51,16 @@ class Follower
     def self.top_ten
         @@all.max(10) { | a, b | a.num_cults() <=> b.num_cults }
     end
+
+    # def fellow_cult_members()
+    #     Follower.all.select { | f | f.cults == self.cults }
+    # end
+
+    def fellow_cult_members()
+        Follower.all.select() do | follower |
+            follower.cults & self.cults != [] && follower != self
+        end
+    end
+
 
 end 

@@ -48,6 +48,17 @@ cult2.recruit_follower(follower9)
 cult2.recruit_follower(follower10)
 cult2.recruit_follower(follower11)
 
+follower1.join_cult(cult3)
+follower1.join_cult(cult4)
+follower1.join_cult(cult5)
+follower1.join_cult(cult6)
+follower1.join_cult(cult7)
+follower2.join_cult(cult8)
+follower2.join_cult(cult9)
+follower2.join_cult(cult10)
+follower2.join_cult(cult11)
+follower2.join_cult(cult12)
+
 binding.pry
 
 puts "Mwahahaha!" # just in case pry is buggy and exits
