@@ -21,7 +21,7 @@ class Cult
     #Works!
     def recruit_follower(follower)
         if follower.age >= self.min_age
-            BloodOath.new(Time.now, self, follower)
+            BloodOath.new(self, follower)
         else
             puts "Sorry! That follower is too young for this circle of damnation."
         end
@@ -45,7 +45,11 @@ class Cult
     #Works!
     def average_age()
         total_age = followers.reduce(0) { | memo, follower | memo += follower.age }
-        (total_age / population()).to_f()
+        (total_age.to_f() / population())
+    end
+
+    def follower_mottos()
+        self.followers().each() { | follower | puts follower.life_motto }
     end
 
     ###### Class methods ######
