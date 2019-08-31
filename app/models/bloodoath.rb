@@ -3,6 +3,8 @@ class BloodOath
 
     @@all = []
 
+
+    ###### Instance methods ######
     #Works!
     def initialize(date, cult, follower)
         @date = date
@@ -20,6 +22,13 @@ class BloodOath
     #Works!
     def self.all()
         @@all
+    end
+
+
+    ###### Class methods ######
+    #Works!
+    def self.first_oath()
+        @@all[0].follower
     end
 
 end

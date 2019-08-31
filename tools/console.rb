@@ -13,14 +13,17 @@ cult_names = ["Chanters United", "End of the World, Inc.", "The End Is Nigh TM",
 locations = ["Chester", "New England", "Scunthorpe", "Hull", "Atlantis"]
 slogans = ["Hail Satan, then hail again", "Murder reasonably", "Mild massacres only, please", "10,000 years of damnation"]
 
-10.times { Follower.new(names.sample, rand(12..80), life_mottos.sample) }
-10.times { Cult.new(cult_names.sample, locations.sample, rand(1283..2019), slogans.sample) }
+20.times { Follower.new(names.sample, rand(12..80), life_mottos.sample) }
+20.times { Cult.new(cult_names.sample, locations.sample, rand(1283..2019), slogans.sample) }
 
+follower1 = Follower.new("Angus", 27, "Life motto")
+follower2 = Follower.new("Bianca", 27, "Life motto")
+follower3 = Follower.new("Blarb", 900, "asdafdf")
 
-test_follower = Follower.all.sample
-test_cult = Cult.all.sample
+Cult.all.sample.recruit_follower(follower1)
+Cult.all.sample.recruit_follower(follower2)
+Cult.all.sample.recruit_follower(follower3)
 
-10.times { test_cult.recruit_follower(Follower.all.sample) }
-p BloodOath.all
+p BloodOath.first_oath()
 
 

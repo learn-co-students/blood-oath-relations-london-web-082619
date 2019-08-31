@@ -3,6 +3,9 @@ class Cult
 
     @@all = []
 
+
+    ###### Instance methods ######
+
     #Works!
     def initialize(name, location, founding_yr, slogan)
         @name = name
@@ -24,8 +27,26 @@ class Cult
     end
 
     #Works!
-    def cult_population()
+    def population()
         blood_oaths().length
+    end
+
+    #Works!
+    def followers()
+        blood_oaths.map { | oath | oath.follower }
+    end
+
+    #Works!
+    def average_age()
+        total_age = followers.reduce(0) { | memo, follower | memo += follower.age }
+        (total_age / population()).to_f()
+    end
+
+    ###### Class methods ######
+
+    #Works!
+    def self.all()
+        @@all
     end
 
     #Works!
@@ -44,8 +65,15 @@ class Cult
     end
 
     #Works!
-    def self.all()
-        @@all
+    def self.least_popular()
+        @@all.min_by { | cult | cult.population }
     end
+
+    #Works!
+    def self.most_common_location()
+        locations = @@all.map { | cult | cult.location }
+        locations.max_by { | location | locations.count(location) }
+    end
+
 
 end
