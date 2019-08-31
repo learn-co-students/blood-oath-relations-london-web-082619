@@ -33,12 +33,24 @@ class Follower
 
     #Works!
     def join_cult(cult)
-        BloodOath.new(Time.now, cult, self)
+        if self.age >= cult.min_age
+            BloodOath.new(Time.now, cult, self)
+        else
+            puts "Sorry! You're too young to join this circle of damnation."
+        end
     end
 
     #Works!
     def cult_slogans()
         self.cults().each() { | cult | puts cult.slogan }
+    end
+
+    #Works!
+    def fellow_cult_members()
+        nested_members = self.cults().each_with_object([]) do | cult, array |
+            array << cult.followers()
+        end
+        nested_members.flatten().reject() { | follower | follower == self }
     end
 
 

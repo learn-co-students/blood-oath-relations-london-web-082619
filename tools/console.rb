@@ -16,14 +16,14 @@ slogans = ["Hail Satan, then hail again", "Murder reasonably", "Mild massacres o
 20.times { Follower.new(names.sample, rand(12..80), life_mottos.sample) }
 20.times { Cult.new(cult_names.sample, locations.sample, rand(1283..2019), slogans.sample) }
 
-follower1 = Follower.new("Angus", 27, "Life motto")
-follower2 = Follower.new("Bianca", 27, "Life motto")
-follower3 = Follower.new("Blarb", 900, "asdafdf")
+follower1 = Follower.new("Follower 1", 16, "Life motto")
+follower2 = Follower.new("Follower 2", 27, "Life motto")
+follower3 = Follower.new("Follower 3", 15, "asdafdf")
+follower4 = Follower.new("Follower 4", 900, "asdafdf")
 
-Cult.all.sample.recruit_follower(follower1)
-Cult.all.sample.recruit_follower(follower2)
-Cult.all.sample.recruit_follower(follower3)
+cult1 = Cult.new("Test Cult 1", "London", "2019", "adfasdfsd", 18)
+cult2 = Cult.new("Test Cult 2", "London", "2019", "adfasdfsd")
+cult3 = Cult.new("Test Cult 3", "London", "2019", "adfasdfsd", 1000)
 
-p BloodOath.first_oath()
-
-
+cult1.recruit_follower(follower4)
+puts cult1.followers()

@@ -1,5 +1,6 @@
 class Cult
-    attr_reader :name, :location, :founding_yr, :slogan
+    attr_accessor :name, :location, :slogan, :min_age
+    attr_reader :founding_yr
 
     @@all = []
 
@@ -7,18 +8,23 @@ class Cult
     ###### Instance methods ######
 
     #Works!
-    def initialize(name, location, founding_yr, slogan)
+    def initialize(name, location, founding_yr, slogan, min_age=18)
         @name = name
         @location = location
         @founding_yr = founding_yr
         @slogan = slogan
+        @min_age = min_age
 
         @@all << self
     end
 
     #Works!
     def recruit_follower(follower)
-        BloodOath.new(Time.now, self, follower)
+        if follower.age >= self.min_age
+            BloodOath.new(Time.now, self, follower)
+        else
+            puts "Sorry! That follower is too young for this circle of damnation."
+        end
     end
 
     #Works!
