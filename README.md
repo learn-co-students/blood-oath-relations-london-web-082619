@@ -109,7 +109,7 @@ Now we want to build out some useful features so `Cult`s and `Follower`s and get
 * `Cult#average_age`
   * returns a `Float` that is the average age of this cult's followers
 * `Cult#my_followers_mottos`
-  * prints out all of the mottos for this cult's followers
+  <!-- * prints out all of the mottos for this cult's followers -->
 * `Cult.least_popular`
   * returns the `Cult` instance who has the least number of followers :(
 * `Cult.most_common_location`
