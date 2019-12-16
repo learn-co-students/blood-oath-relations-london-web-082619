@@ -1,6 +1,5 @@
 class Cult
-    attr_accessor :name, :location, :founding_year, :slogan
-
+    attr_reader :name, :location, :founding_year, :slogan
     @@all = []
 
     def initialize(name, location, slogan)
@@ -9,31 +8,6 @@ class Cult
         @founding_year = Time.now.year
         @slogan = slogan
         @@all << self
-    end
-
-    def blood_oaths
-        BloodOath.all.select { |blood_oath| blood_oath.cult == self }
-    end
-
-    def followers
-        blood_oaths.map { |blood_oath| blood_oath.follower }
-    end
-
-    def recruit_follower(follower)
-        BloodOath.new(self, follower)
-    end
-
-    def cult_population
-        blood_oaths.count
-    end
-
-    def average_age
-        ages = followers.map { |follower| follower.age }
-        ages.sum.to_f / ages.length.to_f
-    end
-
-    def my_followers_mottos
-        followers.map { |follower| follower.life_motto }
     end
 
     def self.all
@@ -57,10 +31,33 @@ class Cult
     end
 
     def self.most_common_location
-        locations = @@all.map { |cult| cult.location }
-        locations.max_by { |location| locations.count(location) }
+        self.all.max_by {|cult| self.all.count(cult.location) }
     end
 
-    
+    def followers
+        blood_oaths.map { |blood_oath| blood_oath.follower }
+    end
+
+    def blood_oaths
+        BloodOath.all.select { |blood_oath| blood_oath.cult == self }
+    end
+
+    def recruit_follower(follower)
+        BloodOath.new(self, follower)
+    end
+
+    def cult_population
+        followers.count
+    end
+
+    def average_age
+        ages = followers.map {|follower| follower.age}
+        ages.reduce(:+).to_f / followers.count
+    end
+
+    def my_followers_mottos
+        followers.map { |follower| follower.life_motto }
+    end
+
 
 end

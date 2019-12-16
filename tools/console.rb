@@ -9,21 +9,22 @@ end
 # so they will be available to test and play around with in your console
 
 
-3.times do
-  Cult.new(Faker::Creature::Cat.name + "Cult", Faker::Movies::HarryPotter.location, Faker::Hipster.sentence)
-end
+c1 = Cult.new("Rocky Horror Picture Show", "Denton", "So, come up to the lab and see what’s on the slab!")
+c2 = Cult.new("Pulp Fiction", "LA", "I want a pot")
+c3 = Cult.new("Twin Peaks", "Twin Peaks", "The owls are not what they seem.")
 
-4.times do
-  Follower.new(Faker::Creature::Horse.name, rand(1..100), Faker::Movies::HarryPotter.quote)
-end
+f1 = Follower.new("Mani", 28, "Hello humans")
+f2 = Follower.new("Jo", 27, "grwnjrenipha")
+f3 = Follower.new("Charly", 35, "Mm bread")
+f4 = Follower.new("Anderson", 27, "Resiliency is key")
+f5 = Follower.new("Sergio", 30, "Make internet fast")
 
 10.times do
   BloodOath.new(Cult.all.sample, Follower.all.sample)
 end
 
-cult1 = Cult.all.first
-follower1 = Follower.all.first
-blood_oath1 = BloodOath.all.first
+b1 = BloodOath.all.first
+b2 = BloodOath.all.last
 
 binding.pry
 

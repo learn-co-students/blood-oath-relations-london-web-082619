@@ -1,5 +1,5 @@
 class Follower
-    attr_accessor :name, :age, :life_motto
+    attr_reader :name, :age, :life_motto
 
     @@all = []
 
@@ -8,22 +8,6 @@ class Follower
         @age = age
         @life_motto = life_motto
         @@all << self
-    end
-
-    def blood_oaths
-      BloodOath.all.select { |bload_oath| bload_oath.follower == self }
-    end
-
-    def cults
-        blood_oaths.map { |bload_oath| bload_oath.cult }
-    end
-
-    def join_cult(cult)
-        BloodOath.new(cult, self)
-    end
-
-    def my_cults_slogans
-        cults.map { |cult| cult.slogan }
     end
 
     def self.all
@@ -35,8 +19,33 @@ class Follower
     end
 
     def self.most_active
-        blood_oaths.max_by { |blood_oath| blood_oaths.count(blood_oath) }
+        followers = BloodOath.all.map {|blood_oath| blood_oath.follower }
+        followers.max_by {|follower| followers.count(follower) }
     end
 
+    def self.top_ten
+        followers = BloodOath.all.map {|blood_oath| blood_oath.follower }
+        followers.max_by(10) {|follower| followers.count(follower) }.uniq
+    end
+
+    def blood_oaths
+        BloodOath.all.select { |bload_oath| bload_oath.follower == self }
+    end
+  
+    def cults
+          blood_oaths.map { |bload_oath| bload_oath.cult }
+    end
+  
+    def join_cult(cult)
+          BloodOath.new(cult, self)
+    end
+  
+    def my_cults_slogans
+          cults.map { |cult| cult.slogan }
+    end
+
+    def fellow_cult_members
+        Follower.all.select { |follower| follower.cults & self.cults != [] && follower != self }
+    end
 
 end
